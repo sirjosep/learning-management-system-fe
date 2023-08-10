@@ -1,0 +1,46 @@
+<pre> {{ createUserForm.value | json }}</pre>
+<div class="container p-3">
+    <h3 class="heading-3 my-3">Create Account</h3>
+    <form class="border p-3" [formGroup]="createUserForm" (ngSubmit)="createAccount()">
+        <div class="row gy-md-1">
+
+            <div class="form-text">Account Detail</div>
+            <div class="col-md-3">
+                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="email" class="form-control" id="email" placeholder="email@email.com" formControlName="email" required>
+            </div>
+
+            <div class="form-text">Profile Detail</div>
+            <div class="col-md-3">
+                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="name" formControlName="profileName" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="phone" formControlName="profilePhone" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <textarea class="form-control" id="address" rows="3"formControlName="profileAddress" required></textarea>
+            </div>
+            <div class="col-md-3">
+                <label for="profile-picture" class="form-label">Profile Picture</label>
+            </div>
+            <div class="col-md-9">
+                <input class="form-control" type="file" id="profile-picture">
+            </div>
+        </div>
+        <a class="btn btn-secondary my-3 me-2" routerLink="/users">BACK</a>
+        <button type="submit" class="btn btn-primary" (change)="fileUpload($event)">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,131 @@
+<pre>{{ createAnswerForm.value | json }}</pre>
+<div class="container mt-3">
+    <div class="d-flex flex-column mb-2">
+        <div class="d-flex justify-content-between">
+            <h2 class="heading-2">{{ taskDetail.learningTasktitle }}</h2>
+            <div class="d-flex gap-2" *ngIf="isTeacher">
+                <a class="btn btn-primary" (click)="toCreateQuestion()">
+                    <i class="bi bi-plus-circle-fill me-1"></i> QUESTION
+                </a>
+                <a class="btn btn-primary" (click)="toReviewList()">
+                    REVIEW SCORE
+                </a>
+            </div>
+        </div>
+        <div class="d-flex text-muted">
+            <span>{{ taskDetail.learningTaskStart}} </span>
+            <span class="mx-1"> to </span>
+            <span>{{ taskDetail.learningTaskEnd }}</span>
+        </div>
+        <span>
+            {{taskDetail.learningTaskDesc}}
+        </span>
+        <hr>
+        <form [formGroup]="createAnswerForm" (ngSubmit)="submitAnswer()">
+            <div class="row" *ngFor="let q of questions; let i = index" formArrayName="answers">
+                <ng-container formGroupName="{{ i }}">
+                    <div class="col-12 mb-3" *ngIf="isMultiple(i)">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="heading-4">Question #{{ i+1 }}</h5>
+                            <a (click)="toStudentAnswer(q.id)" type="button" class="btn btn-primary"
+                                *ngIf="isTeacher">Student Answer</a>
+                        </div>
+                        <span>{{ q.questionBody }}</span>
+                        <ol type="A">
+                            <div class="form-check" *ngFor="let o of q.options">
+                                <input class="form-check-input" type="radio" [id]="optionsClass(o.id)"
+                                    formControlName="questionOptions" [value]="o.id">
+                                <label class="form-check-label" [for]="optionsClass(o.id)">
+                                    <li class="ms-4">
+                                        {{ o.optionsLabel }}
+                                    </li>
+                                </label>
+                            </div>
+                        </ol>
+                        <div class="d-flex gap-2" *ngIf="isStudent">
+                            <span>My Answer : A</span>
+                            <span class="text-success">Correct Answer : A</span>
+                        </div>
+                        <hr>
+                    </div>
+
+
+                    <div class="col-12 mb-3" *ngIf="isFiles(i)">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="heading-4">Question #{{ i+1 }}</h5>
+                            <button type="button" class="btn btn-primary" *ngIf="isTeacher" (click)="toStudentAnswer(q.id)">Student Answer</button>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <ul>
+                                <li *ngFor="let f of q.fileIds">
+                                    <a href="{{ f | url}}">File</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <span>{{ q.questionBody }}</span>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="file-answer" class="form-label">Your Answer </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input class="form-control" type="file" id="file-answer" *ngIf="isStudent"
+                                    (change)="fileUpload($event, i)" multiple>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2" *ngIf="isStudent">
+                            <span>My Answer : </span>
+                            <a href="#">answer1.pdf</a>
+                            <a href="#">answer2.docx</a>
+                        </div>
+                        <hr>
+                    </div>
+
+                    <div class="col-12 mb-3" *ngIf="isEssay(i)">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="heading-4">Question #{{ i+1 }}</h5>
+                            <button type="button" class="btn btn-primary" *ngIf="isTeacher" (click)="toStudentAnswer(q.id)">Student Answer</button>
+                        </div>
+                        <span>{{ q.questionBody }}</span>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="essay-answer" class="form-label">Your Answer </label>
+                            </div>
+                            <div class="col-md-9">
+                                <textarea class="form-control" type="text" id="essay-answer" *ngIf="isStudent"
+                                    formControlName="questionAnswer"></textarea>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2" *ngIf="isStudent">
+                            <span>My Answer : Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+                        </div>
+                        <hr>
+                    </div>
+                </ng-container>
+            </div>
+
+            <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#confirmModal"
+                *ngIf="isStudent">SUBMIT
+                ANSWER</button>
+
+            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Submit answer?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                            <button type="submit" class="btn btn-primary">YES</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <a href="../learning-detail.html" class="btn btn-secondary my-3">BACK</a>
+</div>

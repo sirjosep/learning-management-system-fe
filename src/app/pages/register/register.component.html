@@ -1,0 +1,52 @@
+<pre>{{ registerForm.value | json }} </pre>
+<div class="container p-3">
+    <h3 class="heading-3 my-3">Register Account</h3>
+    <form class="border p-3" [formGroup]="registerForm" (ngSubmit)="createAccount()">
+        <div class="row gy-md-1">
+
+            <div class="form-text">Account Detail</div>
+            <div class="col-md-3">
+                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="email" class="form-control" id="email" placeholder="email@email.com" formControlName="email" required>
+            </div>
+            <div class="col-md-3">
+                <label for="password" class="form-password">Password <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="password" class="form-control" id="password" placeholder="password" formControlName="password" required>
+            </div>
+
+            <div class="form-text">Profile Detail</div>
+            <div class="col-md-3">
+                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="name" formControlName="profileName" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="phone" formControlName="profilePhone" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <textarea class="form-control" id="address" rows="3" formControlName="profileAddress" required></textarea>
+            </div>
+            <div class="col-md-3">
+                <label for="profile-picture" class="form-label">Profile Picture</label>
+            </div>
+            <div class="col-md-9">
+                <input class="form-control" type="file" (change)="fileUpload($event)" id="profile-picture">
+            </div>
+        </div>
+        <a class="btn btn-secondary my-3" routerLink="/login">BACK</a>
+        <app-button [loading]="loading" btnType="submit" label="Submit" classBtn="btn btn-primary"></app-button>
+    </form>
+</div>

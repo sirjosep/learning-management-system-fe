@@ -1,0 +1,28 @@
+<pre>{{ materialForm.value | json }}</pre>
+<div class="container mt-3">
+    <h2 class="heading-2">Create new Material</h2>
+    <form action="" [formGroup]="materialForm" (ngSubmit)="createMaterial()">
+        <div class="row gy-md-2">
+            <div class="col-md-3">
+                <label for="titile" class="form-label">Title <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="title" formControlName="learningMaterialTitle" required>
+            </div>
+            <div class="col-md-3">
+                <label for="body" class="form-label">Body <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text" class="form-control" id="body" formControlName="learningMaterialBody" required></textarea>
+            </div>
+            <div class="col-md-3">
+                <label for="attachment" class="form-label">Attachment </label>
+            </div>
+            <div class="col-md-9">
+                <input class="form-control" type="file" id="attachment" (change)="fileUpload($event)" multiple>
+            </div>
+        </div>
+        <a class="btn btn-secondary my-3 me-2" routerLink="">BACK</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

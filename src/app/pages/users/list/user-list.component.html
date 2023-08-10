@@ -1,0 +1,32 @@
+<div class="table-responsive m-1 p-3">
+    <h2 class="heading-2">User list</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">No. </th>
+                <th scope="col">Name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Address</th>
+                <th scope="col">Role</th>
+                <th scope="col">Active Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let u of users; let i=index">
+                <th scope="row">{{ i+1 }} </th>
+                <td>{{ u.name }}</td>
+                <td>{{ u.phone }}</td>
+                <td>{{ u.address }}</td>
+                <td>{{ u.roleName }}</td>
+                <td>
+                    <div class="text-light d-flex">
+                        <h6 class="border rounded bg-success p-1">
+                            <i class="bi bi-dot"></i>{{ u.activeStatus }}
+                        </h6>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a type="button" class="btn btn-primary" routerLink="/users/new">ADD USER</a>
+</div>

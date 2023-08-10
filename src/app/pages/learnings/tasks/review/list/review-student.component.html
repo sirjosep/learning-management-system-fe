@@ -1,0 +1,54 @@
+<div class="container mt-3">
+    <h2 class="heading-2">Review Quiz {{ reviews[0].learningTaskName }}</h2>
+    <span class="text-muted">Review Score for Quiz #1</span>
+    <hr>
+    <ol class="list-group list-group-numbered" *ngFor="let r of reviews;">
+        <li class="list-group-item d-flex justify-content-between">
+            <div class="d-flex flex-column ms-2 me-auto">
+                <div class="fw-bold">{{ r.studentName }}</div>
+                <span>Score : {{ r.score }}</span>
+                <span>Notes : {{ r.notes }}</span>
+            </div>
+            <button class="btn btn-primary h-50 m-3" data-bs-toggle="modal"
+            data-bs-target="#editReviewModal" (click)="setId(r.studentId, r.id)">EDIT</button>
+        </li>
+    </ol>
+
+    <a href="./task-detail.html" class="btn btn-secondary my-3">BACK</a>
+
+    <div class="modal fade" id="editReviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit review</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="editReviewForm" (ngSubmit)="editReview()">
+                        <div class="row gy-md-2">
+                            <div class="col-md-3">
+                                <label for="essay" class="form-label">Score essay </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" id="essay" min="0" max="100" formControlName="essayScore">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="file" class="form-label">Score file </label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control" id="file" min="0" max="100" formControlName="fileScore">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="notes" class="form-label">Notes </label>
+                            </div>
+                            <div class="col-md-9">
+                                <textarea type="text" class="form-control" id="notes" formControlName="notes"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

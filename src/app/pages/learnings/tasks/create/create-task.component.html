@@ -1,0 +1,34 @@
+<pre>{{ createTaskForm.value | json }}</pre>
+<div class="container mt-3">
+    <h2 class="heading-2">Create new Task</h2>
+    <form [formGroup]="createTaskForm" (ngSubmit)="createTask()">
+        <div class="row gy-md-2">
+            <div class="col-md-3">
+                <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="title" formControlName="learningTaskTitle" required>
+            </div>
+            <div class="col-md-3">
+                <label for="Desc" class="form-label">Desc <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text" class="form-control" id="Desc" formControlName="learningTaskDesc" required></textarea>
+            </div>
+            <div class="col-md-3">
+                <label for="start" class="form-label">Start <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="datetime-local" class="form-control" id="start" formControlName="learningTaskStart" name="start" required>
+            </div>
+            <div class="col-md-3">
+                <label for="end" class="form-label">End <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="datetime-local" class="form-control" id="end" formControlName="learningTaskEnd" name="end" required>
+            </div>
+        </div>
+        <a href="../learning-detail.html" class="btn btn-secondary my-3">BACK</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

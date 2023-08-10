@@ -1,0 +1,58 @@
+
+<div class="container p-3">
+    <h3 class="heading-3 my-3">Profile</h3>
+    <form class="border p-3" [formGroup]="profileUpdateDto" (ngSubmit)="updateProfile()">
+        <div class="row gy-md-1">
+            <div class="form-text">Account Detail</div>
+            <div class="col-md-3">
+                <label for="email" class="form-label">Email </label>
+            </div>
+            <div class="col-md-9">
+                <input [value]="profile.email" type="email" class="form-control" id="email" disabled>
+            </div>
+
+            <div class="form-text">Profile Detail</div>
+            <div class="col-md-3">
+                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input formControlName="profileName" type="text" class="form-control" id="name" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" class="form-control" id="phone" formControlName="profilePhone" required>
+            </div>
+
+            <div class="col-md-3">
+                <label for="address" class="form-label">Address <span class="text-danger">*</span></label>
+            </div>
+            <div class="col-md-9">
+                <textarea class="form-control" id="address" rows="3" formControlName="profileAddress" required></textarea>
+            </div>
+
+            <div class="col-md-3">
+                <label for="role" class="form-label">Role : </label>
+            </div>
+            <div class="col-md-9">
+                <input [value]="profile.roleName" type="text" class="form-control" id="role" disabled>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">SAVE</button>
+    </form>
+
+    <h3 class="heading-3 my-3">Profile Picture</h3>
+    <form class="border p-3" [formGroup]="profileUpdatePhotoDto" (ngSubmit)="updatePhoto()">
+        <div class="col-md-3">
+            <label for="profile-picture" class="form-label">Profile Picture </label>
+        </div>
+        <div class="col-md-9">
+            <div class="d-flex flex-column">
+                <input class="form-control" type="file" id="profile-picture" (change)="fileUpload($event)">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">SAVE</button>
+    </form>
+</div>

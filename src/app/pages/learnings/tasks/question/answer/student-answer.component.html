@@ -1,0 +1,24 @@
+<div class="container mt-3">
+    <h2 class="heading-2">Student Answer</h2>
+    <hr>
+
+    <ol class="list-group list-group-numbered" *ngFor="let a of answers; let i = index">
+        <li class="list-group-item d-flex justify-content-between align-items-start" >
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">{{ a.studentName }}</div>
+                <ng-container *ngIf="isEssay(i)">Answer : {{ a.questionAnswer }}</ng-container>
+                <ng-container *ngIf="isFiles(i)">
+                    Answer : 
+                    <ul>
+                        <li *ngFor="let f of a.fileIds">
+                            <a href="{{ f | url}}">Files</a>
+                        </li>
+                    </ul>
+                </ng-container>
+                <ng-container>Answer : {{ a.questionOptions }}</ng-container>
+            </div>
+        </li>
+    </ol>
+
+    <a href="./task-detail.html" class="btn btn-secondary my-3">BACK</a>
+</div>
